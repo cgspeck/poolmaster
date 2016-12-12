@@ -75,3 +75,7 @@ class Observation(models.Model):
 
     def __str__(self):
         return ' '.join(['%s=%s' % (k, v) for k, v in self.filled_values().items()])
+
+    @property
+    def normalised_observation_date(self):
+        return self.observation_date.strftime('%Y_%m_%d_%H:%M')

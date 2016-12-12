@@ -3,6 +3,9 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+from graphos.sources.model import ModelDataSource
+from graphos.renderers.morris import LineChart
+
 from .models import Observation
 
 OBSERVATION_FIELDS = [
@@ -27,6 +30,16 @@ class IndexView(ListView):
 
 class GraphView(TemplateView):
     template_name = "datacorder/graph.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(GraphView, self).get_context_data(**kwargs)
+        queryset = Observation.objects.order_by('-observation_date')[:100]
+
+        chlorine_data_source = ModelDataSource(queryset,
+                              fields=['normalised_observation_date', 'free_chlorine', 'total_chlorine'])
+        chlorine_chart = LineChart(chlorine_data_source)
+        context['chlorine_chart'] = chlorine_chart
+        return context
 
 class LinksView(TemplateView):
     template_name = "datacorder/links.html"
