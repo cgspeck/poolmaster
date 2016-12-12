@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Poolmaster</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container">
+            <h1>
+                Poolmaster
+            </h1>
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="{% url 'home' %}">List</a></li>
+                <li role="presentation"><a href="{% url 'observation-add' %}">Add</a></li>
+                <li role="presentation"><a href="{% url 'graph' %}">Graphs</a></li>
+                <li role="presentation"><a href="{% url 'links' %}">Links</a></li>
+            </ul>
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>

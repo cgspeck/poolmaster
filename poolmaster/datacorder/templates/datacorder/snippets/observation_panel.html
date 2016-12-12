@@ -1,0 +1,33 @@
+<div class="panel panel-{{panel_class}}">
+  <div class="panel-heading">
+    <a href="{{ object.get_absolute_url }}"><h3 class="panel-title">{{object.observation_created}}</a></h3>
+  </div>
+  <div class="panel-body">
+      {% include "./readonly_field.html" with field_name="algae" field_humanized="Algae" field_value=object.get_algae_display only %}
+      {% include "./readonly_field.html" with field_name="test_type" field_humanized="Test Type" field_value=object.get_test_type_display only %}
+      {% if object.free_chlorine %}
+          {% include "./readonly_field.html" with field_name="free_chlorine" field_humanized="Free Chlorine" field_value=object.free_chlorine only %}
+      {% endif %}
+      {% if object.total_chlorine %}
+          {% include "./readonly_field.html" with field_name="total_chlorine" field_humanized="Total Chlorine" field_value=object.total_chlorine only %}
+      {% endif %}
+      {% if object.ph %}
+          {% include "./readonly_field.html" with field_name="ph" field_humanized="pH" field_value=object.ph only %}
+      {% endif %}
+      {% if object.calcium_hardness %}
+          {% include "./readonly_field.html" with field_name="calcium_hardness" field_humanized="Calcium Hardness" field_value=object.calcium_hardness only %}
+      {% endif %}
+      {% if object.total_dissolved_solids %}
+          {% include "./readonly_field.html" with field_name="total_dissolved_solids" field_humanized="Total Dissolved Solids" field_value=object.total_dissolved_solids only %}
+      {% endif %}
+      {% if object.cyuranic_acid %}
+          {% include "./readonly_field.html" with field_name="cyuranic_acid" field_humanized="Cyuranic Acid" field_value=object.cyuranic_acid only %}
+      {% endif %}
+      {% if object.phosphate %}
+          {% include "./readonly_field.html" with field_name="phosphate" field_humanized="Phosphate" field_value=object.phosphate only %}
+      {% endif %}
+      {% if object.memo %}
+          {% include "./readonly_field.html" with field_name="memo" field_humanized="Memo" field_value=object.memo only %}
+      {% endif %}
+  </div>
+</div>

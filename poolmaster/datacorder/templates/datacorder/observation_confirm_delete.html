@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>Observation Detail</h3>
+    {% include "./snippets/observation_panel.html" with panel_class="primary" %}
+    <strong>Delete this record?</strong>
+    <form action="" method="post">{% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Confirm"/>
+        <a href="{{ object.get_absolute_url }}"><button type="button" class="btn btn-default">Cancel</button></a>
+    </form>
+{% endblock %}

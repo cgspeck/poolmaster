@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Observations</h3>
+    {% if object_list %}
+        {% for observation in object_list %}
+             {% include "./snippets/observation_panel.html" with object=observation panel_class="primary" %}
+        {% endfor %}
+    {% else %}
+    There are no recorded observations.
+    {% endif %}
+{% endblock %}

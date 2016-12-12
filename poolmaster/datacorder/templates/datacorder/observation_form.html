@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if object.pk %}
+        <h3>Edit Observation</h3>
+    {% else %}
+        <h3>Add New Observation</h3>
+    {% endif %}
+    <form method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </form>
+{% endblock %}
