@@ -5,12 +5,25 @@ from django.urls import reverse_lazy
 
 from .models import Observation
 
+OBSERVATION_FIELDS = [
+    'observation_date',
+    'test_type',
+    'algae',
+    'free_chlorine',
+    'total_chlorine',
+    'ph',
+    'cyuranic_acid',
+    'phosphate',
+    'total_dissolved_solids',
+    'calcium_hardness',
+    'memo',
+]
 # Create your views here.
 class IndexView(ListView):
     model = Observation
 
     def get_queryset(self):
-        return Observation.objects.order_by('-observation_created')[:100]
+        return Observation.objects.order_by('-observation_date')[:100]
 
 class GraphView(TemplateView):
     template_name = "datacorder/graph.html"
@@ -23,15 +36,11 @@ class ObservationDetail(DetailView):
 
 class ObservationCreate(CreateView):
     model = Observation
-    fields = [
-        'algae', 'total_dissolved_solids', 'cyuranic_acid', 'free_chlorine', 'total_chlorine', 'ph', 'calcium_hardness', 'phosphate', 'test_type', 'memo',
-    ]
+    fields = OBSERVATION_FIELDS
 
 class ObservationUpdate(UpdateView):
     model = Observation
-    fields = [
-        'algae', 'total_dissolved_solids', 'cyuranic_acid', 'free_chlorine', 'total_chlorine', 'ph', 'calcium_hardness', 'phosphate', 'test_type', 'memo',
-    ]
+    fields = OBSERVATION_FIELDS
 
 class ObservationDelete(DeleteView):
     model = Observation

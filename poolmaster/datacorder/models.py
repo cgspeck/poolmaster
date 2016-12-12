@@ -1,7 +1,9 @@
-from django.urls import reverse
+import django
 from django.db import models
-
 from django.db.models.fields.related import ManyToManyField
+
+from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 class Observation(models.Model):
@@ -36,6 +38,8 @@ class Observation(models.Model):
     )
     memo = models.TextField(blank=True)
     observation_created = models.DateTimeField(auto_now_add=True)
+    observation_updated = models.DateTimeField(auto_now=True)
+    observation_date = models.DateTimeField(default=django.utils.timezone.now)
 
     def get_absolute_url(self):
         return reverse('observation-detail', kwargs={'pk': self.pk})
