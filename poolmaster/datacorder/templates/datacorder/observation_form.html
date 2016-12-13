@@ -13,8 +13,20 @@
             {% csrf_token %}
             {% buttons %}
             <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "floppy-disk" %} Submit
+                {% bootstrap_icon "floppy-disk" %} Save
+            </button>
+            <button id="cancelButton" type="button" class="btn btn-default">
+                {% bootstrap_icon "remove" %} Cancel
             </button>
             {% endbuttons %}
     </form>
+    <script type="text/javascript">
+        document.getElementById("cancelButton").onclick = function () {
+        {% if object.pk %}
+            location.href = "{{ object.get_absolute_url }}";
+        {% else %}
+            location.href = "{% url 'home'  %}";
+        {% endif %}
+        };
+    </script>
 {% endblock %}

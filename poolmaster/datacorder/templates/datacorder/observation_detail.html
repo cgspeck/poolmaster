@@ -1,9 +1,26 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
+
 {% block content %}
     <h3>Observation Detail</h3>
     {% include "./snippets/observation_panel.html" with panel_class="primary" %}
-    <div class="btn-group" role="group" aria-label="Observation Detail Navigation">
-      <a href="{% url 'observation-update' object.pk %}"<button type="button" class="btn btn-default">Edit</button></a>
-      <a href="{% url 'observation-delete' object.pk %}"><button type="button" class="btn btn-danger">Delete</button></a>
-    </div>
+    {% buttons %}
+    <button id="editButton" type="button" class="btn btn-primary">
+        {% bootstrap_icon "pencil" %} Edit
+    </button>
+    <button id="deleteButton" type="button" class="btn btn-danger">
+        {% bootstrap_icon "erase" %} Delete
+    </button>
+    {% endbuttons %}
+
+    <script type="text/javascript">
+        document.getElementById("editButton").onclick = function () {
+            location.href = "{% url 'observation-update' object.pk %}";
+        };
+    </script>
+    <script type="text/javascript">
+        document.getElementById("deleteButton").onclick = function () {
+            location.href = "{% url 'observation-delete' object.pk %}";
+        };
+    </script>
 {% endblock %}
