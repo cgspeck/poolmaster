@@ -7,20 +7,8 @@ from graphos.sources.model import ModelDataSource
 from graphos.renderers.morris import LineChart
 
 from .models import Observation
+from .forms import CreateEditForm
 
-OBSERVATION_FIELDS = [
-    'observation_date',
-    'test_type',
-    'algae',
-    'free_chlorine',
-    'total_chlorine',
-    'ph',
-    'cyuranic_acid',
-    'phosphate',
-    'total_dissolved_solids',
-    'calcium_hardness',
-    'memo',
-]
 # Create your views here.
 class IndexView(ListView):
     model = Observation
@@ -47,24 +35,13 @@ class LinksView(TemplateView):
 class ObservationDetail(DetailView):
     model = Observation
 
-from bootstrap3_datetime.widgets import DateTimePicker
-
 class ObservationCreate(CreateView):
     model = Observation
-    fields = OBSERVATION_FIELDS
-
-    def get_form(self):
-        form = super(ObservationCreate, self).get_form()
-        form.fields['observation_date'].widget = DateTimePicker(options={
-            "format": "YYYY-MM-DD HH:mm",
-            "pickSeconds": False
-            }
-        )
-        return form
+    form_class = CreateEditForm
 
 class ObservationUpdate(UpdateView):
     model = Observation
-    fields = OBSERVATION_FIELDS
+    form_class = CreateEditForm
 
 class ObservationDelete(DeleteView):
     model = Observation
