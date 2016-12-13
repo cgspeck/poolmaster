@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'graphos',
+    'bootstrap3',
     'bootstrap3_datetime',
 ]
 

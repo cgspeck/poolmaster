@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -10,10 +11,12 @@
         <h3>Add New Observation</h3>
     {% endif %}
     <form method="post">
-        <div class="form-group">
+        {% bootstrap_form form %}
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" class="btn btn-default" value="Submit" />
-        </div>
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "floppy-disk" %} Submit
+            </button>
+            {% endbuttons %}
     </form>
 {% endblock %}
