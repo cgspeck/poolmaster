@@ -47,9 +47,20 @@ class LinksView(TemplateView):
 class ObservationDetail(DetailView):
     model = Observation
 
+from bootstrap3_datetime.widgets import DateTimePicker
+
 class ObservationCreate(CreateView):
     model = Observation
     fields = OBSERVATION_FIELDS
+
+    def get_form(self):
+        form = super(ObservationCreate, self).get_form()
+        form.fields['observation_date'].widget = DateTimePicker(options={
+            "format": "YYYY-MM-DD HH:mm",
+            "pickSeconds": False
+            }
+        )
+        return form
 
 class ObservationUpdate(UpdateView):
     model = Observation
