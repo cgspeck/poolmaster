@@ -13,7 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
 
 from datacorder.views import *
@@ -27,4 +29,4 @@ urlpatterns = [
     url(r'observation/(?P<pk>[0-9]+)$', ObservationDetail.as_view(), name='observation-detail'),
     url(r'observation/(?P<pk>[0-9]+)/update$', ObservationUpdate.as_view(), name='observation-update'),
     url(r'observation/(?P<pk>[0-9]+)/delete$', ObservationDelete.as_view(), name='observation-delete'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
