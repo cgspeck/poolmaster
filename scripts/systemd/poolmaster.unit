@@ -5,9 +5,8 @@ After=docker.service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/docker run --expose 8000 --env-file /etc/poolmaster/poolmaster.conf --name poolmaster /usr/src/app/scripts/run_server.sh
+ExecStart=/usr/bin/docker docker run --env-file /etc/poolmaster/poolmaster.conf --rm --name poolmaster -p 8000:8000 poolmaster
 ExecStop=/usr/bin/docker stop -t 2 poolmaster
-ExecStopPost=/usr/bin/docker rm -f poolmaster
 
 [Install]
 WantedBy=default.target

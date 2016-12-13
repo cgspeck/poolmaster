@@ -1,6 +1,5 @@
 #! /bin/bash -e
-export ENVIRONMENT=production
 cd poolmaster
 python manage.py migrate
-gunicorn poolmaster.wsgi
+gunicorn -b 0.0.0.0:8000 poolmaster.wsgi
 cd -
