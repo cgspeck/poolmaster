@@ -1,9 +1,20 @@
 #! /bin/bash
+if [ ${#} -eq 1 ]; then
+  env=$1
+else
+  env=dev
+fi
+
+if [ ${#} -gt 1 ]; then
+  cmd=${@:2}
+else
+  cmd=/bin/bash
+fi
+
 set -e
-docker run -e ENVIRONMENT=dev \
+docker run -e ENVIRONMENT=${env} \
   --rm \
-  --name poolmaster-dev \
   -v "$(pwd)/":/usr/src/app/ \
-  -ti \
+  -it \
   poolmaster \
-  python /usr/src/app/poolmaster/manage.py shell_plus
+  ${cmd}
