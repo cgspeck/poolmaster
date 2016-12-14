@@ -1,4 +1,4 @@
-boto3==1.4.2
+boto==2.44.0
 Django==1.10.4
 django-bootstrap3==7.1.0
 git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git#egg=django-bootstrap3-datetimepicker
