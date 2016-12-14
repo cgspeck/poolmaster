@@ -1,8 +1,10 @@
+boto==2.44.0
 Django==1.10.4
 django-bootstrap3==7.1.0
+git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git#egg=django-bootstrap3-datetimepicker
 django-extensions==1.7.5
 django-graphos==0.3.10
-Werkzeug==0.11.11
+django-storages==1.5.1
 gunicorn==19.6.0
--e git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git#egg=django-bootstrap3-datetimepicker
 psycopg2==2.6.2
+Werkzeug==0.11.11

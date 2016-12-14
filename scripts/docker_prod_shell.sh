@@ -1,9 +1,5 @@
 #! /bin/bash
-if [ ${#} -eq 1 ]; then
-  env=$1
-else
-  env=dev
-fi
+env=production
 
 if [ ${#} -gt 1 ]; then
   cmd=${@:2}
@@ -14,6 +10,7 @@ fi
 set -e
 docker run -e ENVIRONMENT=${env} \
   --rm \
+  --env-file /etc/poolmaster/poolmaster.conf \
   -v "$(pwd)/":/usr/src/app/ \
   -it \
   poolmaster \
