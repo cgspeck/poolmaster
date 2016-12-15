@@ -3,8 +3,12 @@ Django==1.10.4
 django-bootstrap3==7.1.0
 git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git#egg=django-bootstrap3-datetimepicker
 django-extensions==1.7.5
+django-import-export==0.5.1
 django-graphos==0.3.10
 django-storages==1.5.1
 gunicorn==19.6.0
+ipython==5.1.0
 psycopg2==2.6.2
+PyYAML==3.12
+ujson==1.35
 Werkzeug==0.11.11

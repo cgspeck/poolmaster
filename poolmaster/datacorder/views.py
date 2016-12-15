@@ -1,4 +1,6 @@
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
+from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -6,8 +8,9 @@ from django.urls import reverse_lazy
 from graphos.sources.model import ModelDataSource
 from graphos.renderers.morris import LineChart
 
-from .models import Observation
 from .forms import CreateEditForm
+from .models import Observation
+from .resources import ObservationResource
 
 # Create your views here.
 class IndexView(ListView):
@@ -46,3 +49,48 @@ class ObservationUpdate(UpdateView):
 class ObservationDelete(DeleteView):
     model = Observation
     success_url = reverse_lazy('home')
+
+class ExportView(View):
+
+    def get(self, request, format='.html'):
+        ACCEPTED_FORMATS={
+            'html': {
+                'Content-Type': 'text/html; charset=utf-8',
+                'Content-Disposition': 'inline'
+            },
+            'csv':  {
+                'Content-Type': 'text/csv; charset=utf-8',
+                'Content-Disposition': 'attachment; filename="export.csv"'
+            },
+            'json': {
+                'Content-Type': 'application/json',
+                'Content-Disposition': 'attachment; filename="export.json"'
+            },
+            'ods': {
+                'Content-Type': 'application/vnd.oasis.opendocument.spreadsheet',
+                'Content-Disposition': 'attachment; filename="export.ods"'
+            },
+            'tsv':  {
+                'Content-Type': 'text/tsv; charset=utf-8',
+                'Content-Disposition': 'attachment; filename="export.tsv"'
+            },
+            'xls': {
+                'Content-Type': 'application/vnd.ms-excel',
+                'Content-Disposition': 'attachment; filename="export.xls"'
+            }
+        }
+        requested_format = format.strip('.').lower()
+
+        if requested_format not in ACCEPTED_FORMATS:
+            return HttpResponseBadRequest('Unrecognised format')
+
+        o = ObservationResource();
+        e = o.export()
+        result = getattr(e, requested_format)
+
+        response = HttpResponse(
+            result,
+            content_type=ACCEPTED_FORMATS[requested_format]['Content-Type'],
+        )
+        response['Content-Disposition'] = ACCEPTED_FORMATS[requested_format]['Content-Disposition']
+        return response

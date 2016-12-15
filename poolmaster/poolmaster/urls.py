@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'observation/(?P<pk>[0-9]+)$', ObservationDetail.as_view(), name='observation-detail'),
     url(r'observation/(?P<pk>[0-9]+)/update$', ObservationUpdate.as_view(), name='observation-update'),
     url(r'observation/(?P<pk>[0-9]+)/delete$', ObservationDelete.as_view(), name='observation-delete'),
+    url(r'export(?P<format>[.\w]+)$', ExportView.as_view(), name='export'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
-    'datacorder.apps.DatacorderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,9 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'graphos',
     'bootstrap3',
     'bootstrap3_datetime',
+    'import_export',
+    'graphos',
+    'datacorder.apps.DatacorderConfig',
 ]
 
 MIDDLEWARE = [
@@ -104,3 +105,5 @@ STATIC_URL = '/static/'
 BOOTSTRAP3 = {
     'include_jquery': True,
 }
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True

@@ -1,3 +1,7 @@
+from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
+from .models import Observation
 
-# Register your models here.
+@admin.register(Observation)
+class ObservationAdmin(ImportExportModelAdmin):
+    pass

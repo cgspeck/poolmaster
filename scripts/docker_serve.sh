@@ -1,6 +1,7 @@
 #! /bin/bash
 set -e
 docker run \
+  -it \
   --env-file /etc/poolmaster/poolmaster.conf \
   --rm \
   --name poolmaster \
