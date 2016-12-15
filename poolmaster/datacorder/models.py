@@ -27,11 +27,11 @@ class Observation(models.Model):
     )
     total_dissolved_solids = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
     cyuranic_acid = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    free_chlorine = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    total_chlorine = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    ph = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    free_chlorine = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    total_chlorine = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    ph = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     calcium_hardness = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
-    phosphate = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    phosphate = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     test_type = models.CharField(
         max_length=12,
         choices=TEST_CHOICES,
