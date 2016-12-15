@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.fields.related import ManyToManyField
 
 from django.utils import timezone
+from django.utils.dateformat import DateFormat
 from django.urls import reverse
 
 # Create your models here.
@@ -77,5 +78,9 @@ class Observation(models.Model):
         return ' '.join(['%s=%s' % (k, v) for k, v in self.filled_values().items()])
 
     @property
-    def normalised_observation_date(self):
-        return self.observation_date.strftime('%Y_%m_%d_%H:%M')
+    def observation_date_timestamp(self):
+        return int(DateFormat(self.observation_date).format('U'))
+
+    @property
+    def observation_date_timestamp_mills(self):
+        return self.observation_date_timestamp * 1000

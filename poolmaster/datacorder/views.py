@@ -27,7 +27,7 @@ class GraphView(TemplateView):
         queryset = Observation.objects.order_by('-observation_date')[:100]
 
         chlorine_data_source = ModelDataSource(queryset,
-                              fields=['normalised_observation_date', 'free_chlorine', 'total_chlorine'])
+                              fields=['observation_date_timestamp_mills', 'total_chlorine', 'free_chlorine', 'ph'])
         chlorine_chart = LineChart(chlorine_data_source)
         context['chlorine_chart'] = chlorine_chart
         return context
