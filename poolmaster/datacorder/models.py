@@ -41,6 +41,8 @@ class Observation(models.Model):
     observation_created = models.DateTimeField(auto_now_add=True)
     observation_updated = models.DateTimeField(auto_now=True)
     observation_date = models.DateTimeField(default=django.utils.timezone.now)
+    water_temperature = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    air_temperature = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('observation-detail', kwargs={'pk': self.pk})

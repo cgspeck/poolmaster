@@ -11,6 +11,8 @@ OBSERVATION_FIELDS = [
     'free_chlorine',
     'total_chlorine',
     'ph',
+    'water_temperature',
+    'air_temperature',
     'cyuranic_acid',
     'phosphate',
     'total_dissolved_solids',
