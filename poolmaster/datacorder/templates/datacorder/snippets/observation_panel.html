@@ -20,6 +20,9 @@
       {% if object.air_temperature %}
           {% include "./readonly_field.html" with field_name="air_temperature" field_humanized="Air Temperature" field_value=object.air_temperature only %}
       {% endif %}
+      {% if object.total_alkalinity %}
+          {% include "./readonly_field.html" with field_name="total_alkalinity" field_humanized="Total Alkalinity" field_value=object.total_alkalinity only %}
+      {% endif %}
       {% if object.calcium_hardness %}
           {% include "./readonly_field.html" with field_name="calcium_hardness" field_humanized="Calcium Hardness" field_value=object.calcium_hardness only %}
       {% endif %}
