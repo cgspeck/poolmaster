@@ -6,44 +6,8 @@ from django.utils import timezone
 from django.utils.dateformat import DateFormat
 from django.urls import reverse
 
-class InstrumentedModel(models.Model):
-    class Meta:
-        abstract=True
-
-    def to_dict(self):
-        opts = self._meta
-        data = {}
-        for f in opts.concrete_fields + opts.many_to_many:
-            if isinstance(f, ManyToManyField):
-                if self.pk is None:
-                    data[f.name] = []
-                else:
-                    data[f.name] = list(f.value_from_object(self).values_list('pk', flat=True))
-            else:
-                data[f.name] = f.value_from_object(self)
-        return data
-
-    def __repr__(self):
-        res = ''
-        for k, v in self.to_dict().items():
-            res += " {key}={value}".format(key=k, value=v)
-        return '<{name}{data}>'.format(name=self.__class__.__name__, data=res)
-
-    def filled_values(self):
-        res = {}
-        for k, v in self.to_dict().items():
-            if isinstance(v, str):
-                if len(v) > 0:
-                    res[k] = v
-            elif v is not None:
-                res[k] = v
-        return res
-
-    def __str__(self):
-        return ' '.join(['%s=%s' % (k, v) for k, v in self.filled_values().items()])
-
 # Create your models here.
-class Observation(InstrumentedModel):
+class Observation(models.Model):
     ALGAE_CHOICES = (
         ('', 'Not noted'),
         ('NONE', 'None'),
@@ -83,6 +47,38 @@ class Observation(InstrumentedModel):
 
     def get_absolute_url(self):
         return reverse('observation-detail', kwargs={'pk': self.pk})
+
+    def to_dict(self):
+        opts = self._meta
+        data = {}
+        for f in opts.concrete_fields + opts.many_to_many:
+            if isinstance(f, ManyToManyField):
+                if self.pk is None:
+                    data[f.name] = []
+                else:
+                    data[f.name] = list(f.value_from_object(self).values_list('pk', flat=True))
+            else:
+                data[f.name] = f.value_from_object(self)
+        return data
+
+    def __repr__(self):
+        res = ''
+        for k, v in self.to_dict().items():
+            res += " {key}={value}".format(key=k, value=v)
+        return '<Observation{data}>'.format(data=res)
+
+    def filled_values(self):
+        res = {}
+        for k, v in self.to_dict().items():
+            if isinstance(v, str):
+                if len(v) > 0:
+                    res[k] = v
+            elif v is not None:
+                res[k] = v
+        return res
+
+    def __str__(self):
+        return ' '.join(['%s=%s' % (k, v) for k, v in self.filled_values().items()])
 
     @property
     def observation_date_timestamp(self):
