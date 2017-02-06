@@ -91,3 +91,78 @@ class Observation(InstrumentedModel):
     @property
     def observation_date_timestamp_mills(self):
         return self.observation_date_timestamp * 1000
+
+
+class Pool(InstrumentedModel):
+    CONSTRUCTION_TYPE_CHOICES = (
+        ('', 'Not noted'),
+        ('VINYL', 'Vinyl lined, in-ground or buried in-ground'),
+        ('TILED', 'Tiled'),
+        ('CONCRETE', 'Concrete formed'),
+        ('FIBERGLASS', 'Fiberglass'),
+    )
+    UNIT_CHOICES = (
+        ('', 'Not noted'),
+        ('METRIC', 'Metric / SI'),
+        ('IMPERIAL', 'Imperial'),
+    )
+    FILTRATION_CHOICES = (
+        ('', 'Not noted'),
+        ('SAND', 'Sand filter'),
+        ('CARTRIDGES', 'Cartridge filter'),
+    )
+    SANITIZER_CHOICES = (
+        ('', 'Not noted'),
+        ('CHLORINE', 'Chlorine dosing'),
+        ('BROMINE', 'Bromine dosing'),
+        ('SALT', 'Salt dosing with chlorine generator'),
+    )
+    HEATER_CHOICES = (
+        ('', 'Not noted'),
+        ('NONE', 'None'),
+        ('SOLAR', 'Active solar heating'),
+        ('GAS', 'Gas fired heater'),
+        ('ELECTRIC', 'Electrically heated'),
+    )
+    name = models.TextField()
+    construction_type = models.CharField(
+        max_length=12,
+        choices=CONSTRUCTION_TYPE_CHOICES,
+        blank=True,
+    )
+    capacity = models.IntegerField(null=True, blank=True)
+    units = models.CharField(
+        max_length=12,
+        choices=UNIT_CHOICES,
+        blank=True,
+    )
+    filtration = models.CharField(
+        max_length=12,
+        choices=FILTRATION_CHOICES,
+        blank=True,
+    )
+    sanitizer = models.CharField(
+        max_length=12,
+        choices=SANITIZER_CHOICES,
+        blank=True,
+    )
+    heater = models.CharField(
+        max_length=12,
+        choices=HEATER_CHOICES,
+        blank=True,
+    )
+    city = models.CharField(
+        max_length=50,
+        blank=True,
+    )
+    state = models.CharField(
+        max_length=50,
+        blank=True,
+    )
+    country = models.CharField(
+        max_length=50,
+        blank=True,
+    )
+
+    def get_absolute_url(self):
+        return reverse('pool-detail', kwargs={'pk': self.pk})

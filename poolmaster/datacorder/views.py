@@ -9,7 +9,7 @@ from graphos.sources.model import ModelDataSource
 from graphos.renderers.morris import LineChart
 
 from .forms import CreateEditForm
-from .models import Observation
+from .models import Observation, Pool
 from .resources import ObservationResource
 
 # Create your views here.
@@ -49,6 +49,22 @@ class ObservationUpdate(UpdateView):
 class ObservationDelete(DeleteView):
     model = Observation
     success_url = reverse_lazy('home')
+
+class PoolDetail(DetailView):
+    model = Pool
+
+    def get_context_data(self, **kwargs):
+        context = super(PoolDetail, self).get_context_data(**kwargs)
+        context['fields'] = [
+            {
+                'name': f.name,
+                'verbose_name': f.verbose_name,
+                'is_choices': len(f.choices ) > 0,
+                'name_is_choices': f.name + ',' + '%s'  % (len(f.choices ) > 0)
+            } for f in Pool._meta.fields if f.name not in ['id']
+        ]
+        return context
+
 
 class ExportView(View):
 
