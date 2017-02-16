@@ -1,8 +1,10 @@
 import os
 import importlib
+import logging
 
-env = '.' + os.environ.get('ENVIRONMENT', 'dev')
-print("Environment is {env}".format(env=env))
-module = importlib.import_module(env, 'poolmaster.settings')
-
-globals().update(vars(module))
+try:
+    from .local_settings import *
+    logging.info('Imported local_settings')
+except ImportError as e:
+    from .default import *
+    logging.info('Imported default settings')

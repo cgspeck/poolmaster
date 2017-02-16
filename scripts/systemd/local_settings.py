@@ -1,6 +1,6 @@
-from os import environ
+from .default import *
 
-from .common import *
+DEBUG = False
 
 DATABASES = {
     'default': {
@@ -13,7 +13,7 @@ DATABASES = {
     }
 }
 SECRET_KEY = environ['SECRET_KEY']
-ALLOWED_HOSTS = environ['ALLOWED_HOSTS'].split(',')
+ALLOWED_HOSTS = '*'
 
 INSTALLED_APPS += ['storages']
 
