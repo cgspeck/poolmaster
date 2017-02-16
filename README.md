@@ -31,7 +31,7 @@ To run this in docker, customise local_settings.py file and run with:
 ```
 docker run \
   --rm \
-  -v /path/to/your/local_settings.py:/usr/src/app/poolmaster/local_settings.py \
+  -v /path/to/your/local_settings.py:/usr/src/app/poolmaster/poolmaster/settings/local_settings.py \
   -p 8000:8000 \
   -it \
   cgspeck/poolmaster
@@ -44,7 +44,7 @@ If you want to run from source through the docker container, then run:
 docker run \
   --rm \
   --name poolmaster-dev \
-  -v /path/to/your/local_settings.py:/usr/src/app/poolmaster/local_settings.py \  
+  -v /path/to/your/local_settings.py:/usr/src/app/poolmaster/poolmaster/settings/local_settings.py \
   -v "$(pwd)/":/usr/src/app/ \
   -p 8000:8000 \
   -ti \

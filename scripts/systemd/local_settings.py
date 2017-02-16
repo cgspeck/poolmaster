@@ -1,3 +1,5 @@
+from .default import *
+
 DEBUG = False
 
 DATABASES = {
