@@ -1,9 +1,8 @@
 #! /bin/bash -e
-if [ ! -f /etc/poolmaster/poolmaster.conf ]; then
+if [ ! -f /etc/poolmaster/local_settings.py ]; then
   mkdir /etc/poolmaster
-  cp scripts/systemd/poolmaster.conf /etc/poolmaster/
+  cp scripts/systemd/local_settings.py /etc/poolmaster/
 fi
 cp scripts/systemd/poolmaster.service /etc/systemd/system/
 systemctl daemon-reload
-systemctl start poolmaster.service
 systemctl enable poolmaster.service
